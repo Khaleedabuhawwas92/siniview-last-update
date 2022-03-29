@@ -1,4 +1,5 @@
 const db = require('../models');
+
 const ReportSale = db.reportSale;
 
 // Create and Save a new Tutorial
@@ -6,23 +7,18 @@ exports.create = (req, res) => {
    // Validate request
 
    // Create a Tutorial
-   let co = ['halooo', 'good job', 'am redy'];
+  
    const reportSale = new ReportSale({
-      tab: req.body.tab ? req.body.tab : '',
-
-      product: {
-         allIetms: req.body.allIetms ? req.body.allIetms : co,
-         image: req.body.image
-            ? req.body.image
-            : 'https://picsum.photos/1920/1080?random',
-
-         additions: req.body.additions ? req.body.additions : [],
-         sumation: req.body.sumation ? req.body.sumation : 25,
-         casherName: req.body.casherName ? req.body.casherName : 'khaleed',
-         discraption: req.body.discraption ? req.body.discraption : 'true',
-         price: req.body.price ? req.body.price : '2.75',
-      },
+      casherName: req.body.casherName,
       published: req.body.published ? req.body.published : true,
+      image: req.body.image
+         ? req.body.image
+         : 'https://picsum.photos/1920/1080?random',
+      additions: req.body.additions ? req.body.additions : ['null'],
+      sumation: req.body.sumation,
+      discraption: req.body.discraption ? req.body.discraption : 'true',
+  
+   
    });
 
    // Save Items in the database
@@ -38,30 +34,31 @@ exports.create = (req, res) => {
          });
       });
 };
-exports.createNewProdect = (req, res) => {
-   const id = req.params.id;
-   // Create a reportSale
-   const product = new Object({
-      title: req.body.title ? req.body.title : 'Boneless',
-      price: req.body.price ? req.body.price : '2.50',
-      image: req.body.image
-         ? req.body.image
-         : 'https://static.remove.bg/remove-bg-web/a6eefcd21dff1bbc2448264c32f7b48d7380cb17/assets/start_remove-c851bdf8d3127a24e2d137a55b1b427378cd17385b01aec6e59d5d4b5f39d2ec.png',
-      discraption: req.body.discraption ? req.body.discraption : 'true',
-      additions: req.body.additions ? req.body.additions : ['halooo'],
-   });
-   // Save Item in the database
-   ReportSale.findOneAndUpdate({ _id: id }, { $push: { product: product } })
-      .then((data) => {
-         res.send({ massege: 'prodect has been added successfully' }, product);
-      })
-      .catch((err) => {
-         res.status(500).send({
-            message:
-               err.message || 'Some error occurred while creating the Item.',
-         });
-      });
-};
+// exports.createNewProdect = (req, res) => {
+//    const id = req.params.id;
+//    let co = ['halooo', 'good job', 'am redy'];
+//    // Create a reportSale
+//    const product = new Object({
+//       allIetms: req.body.allIetms ? req.body.allIetms : co,
+//       additions: req.body.additions ? req.body.additions : [],
+//       sumation: req.body.sumation ? req.body.sumation : 27,
+//       casherName: req.body.casherName ? req.body.casherName : 'khaled',
+//       discraption: req.body.discraption ? req.body.discraption : 'true',
+//       price: req.body.price ? req.body.price : 22,
+//       created: new Date(),
+//    });
+//    // Save Item in the database
+//    ReportSale.findOneAndUpdate({ _id: id }, { $push: { product: product } })
+//       .then((data) => {
+//          res.send({ massege: 'prodect has been added successfully' }, product);
+//       })
+//       .catch((err) => {
+//          res.status(500).send({
+//             message:
+//                err.message || 'Some error occurred while creating the Item.',
+//          });
+//       });
+// };
 
 // Retrieve all Items from the database.
 exports.findAll = (req, res) => {

@@ -13,15 +13,7 @@ exports.create = (req, res) => {
       tab: req.body.tab,
       description: req.body.description,
       published: req.body.published ? req.body.published : true,
-      product: {
-         title: req.body.title ? req.body.title : 'burgar',
-         price: req.body.price ? req.body.price : '2.75',
-         image: req.body.image
-            ? req.body.image
-            : 'https://picsum.photos/1920/1080?random',
-         discraption: req.body.discraption ? req.body.discraption : 'true',
-         additions: req.body.additions ? req.body.additions : [],
-      },
+      product: req.body.product ? req.body.product : [],
    });
 
    // Save Items in the database

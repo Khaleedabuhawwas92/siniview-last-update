@@ -1,21 +1,17 @@
+const { Date } = require('mongoose');
 module.exports = (mongoose) => {
    var schema = mongoose.Schema(
       {
-         tab: { type: String, required: true },
-         product: [
-            {
-               allIetms: { type: Array, required: true },
-               image: String,
-               discraption: String,
-               additions: Array,
-               sumation: { type: Number, required: true },
-               casherName: { type: String, required: true },
-               price: { type: String, required: true },
-            },
-         ],
-
+         allIetms: { type: Array, required: true, timestamps: true,default:["khaled","ahmad","abdallah"] },
+         
+         discraption: String,
+         additions: Array,
+         sumation: { type: Number, required: true, default: 25 },
+         casherName: { type: String, required: true, default: 'khaled' },
+         price: { type: Number, required: true, default: 22 },
          published: Boolean,
       },
+
       { timestamps: true }
    );
 
