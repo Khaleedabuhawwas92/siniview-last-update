@@ -1,4 +1,5 @@
 const db = require('../models');
+const genarat = require('../services/recipeNumber.js');
 const ReportSale = db.reportSale;
 
 // Create and Save a new Tutorial
@@ -6,24 +7,17 @@ exports.create = (req, res) => {
    // Validate request
 
    // Create a Tutorial
-   let co = ['halooo', 'good job', 'am redy'];
+
    const reportSale = new ReportSale({
-      tab: req.body.tab ? req.body.tab : '',
-
-      product: {
-         allIetms: req.body.allIetms ? req.body.allIetms : co,
-         image: req.body.image
-            ? req.body.image
-            : 'https://picsum.photos/1920/1080?random',
-
-         additions: req.body.additions ? req.body.additions : [],
-         sumation: req.body.sumation ? req.body.sumation : 25,
-         casherName: req.body.casherName ? req.body.casherName : 'khaleed',
-         discraption: req.body.discraption ? req.body.discraption : 'true',
-         price: req.body.price ? req.body.price : '2.75',
-      },
+      allIetms: req.body.allIetms,
+      additions: req.body.additions,
+      sumation: req.body.sumation,
+      recpieNumber: req.body.recpieNumber,
+      casherName: req.body.casherName,
+      discraption: req.body.discraption,
       published: req.body.published ? req.body.published : true,
    });
+   // genarat();
 
    // Save Items in the database
    reportSale

@@ -1,19 +1,12 @@
 module.exports = (mongoose) => {
    var schema = mongoose.Schema(
       {
-         tab: { type: String, required: true },
-         product: [
-            {
-               allIetms: { type: Array, required: true },
-               image: String,
-               discraption: String,
-               additions: Array,
-               sumation: { type: Number, required: true },
-               casherName: { type: String, required: true },
-               price: { type: String, required: true },
-            },
-         ],
-
+         allIetms: { type: Array, required: true,default:["khaleed","ahmad","abuhawwas"] },
+         discraption: { type: Number, required: true,default:25 },
+         additions: { type: Array, required: true,default:"null" },
+         sumation: { type: Number, required: true,default:25 },
+         recpieNumber: { type: Number, required: true,default:0},
+         casherName: { type: String, required: true,default:"khaled" },
          published: Boolean,
       },
       { timestamps: true }
