@@ -1,7 +1,7 @@
 const db = require('../models');
 const ReportSale = db.reportSale;
 module.exports = function (req, res, next) {
-   ReportSale.find()
+   ReportSale.find({createdAt:-1})
       .then((data) => {
          res.send(data);
          console.log(data);

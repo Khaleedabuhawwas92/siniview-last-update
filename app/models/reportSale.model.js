@@ -6,6 +6,8 @@ module.exports = (mongoose) => {
          additions: { type: Array, required: true,default:"null" },
          sumation: { type: Number, required: true,default:25 },
          recpieNumber: { type: Number, required: true,default:0},
+         tax: { type: Number, required: true,default:1},
+         totalAccount:{ type: Number, required: true,default:1},
          casherName: { type: String, required: true,default:"khaled" },
          published: Boolean,
       },
