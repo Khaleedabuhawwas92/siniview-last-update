@@ -11,7 +11,7 @@ module.exports = (app) => {
    // faind all  reportItems
    router.get('/undisplaypublished/:id', reportItems.published);
    // faind all  reportItems
-   router.get('/displaypublished', reportItems.findAllPublished);
+   router.get('/displaypublished/:name', reportItems.findAllPublished);
 
    // Retrieve a single reportItems with id
    router.get('/:id', reportItems.findOne);

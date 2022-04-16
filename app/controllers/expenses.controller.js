@@ -13,7 +13,7 @@ exports.create = (req, res) => {
    const expenses = new Expenses({
       description: req.body.description,
       value: req.body.value,
- 
+
       published: req.body.published,
       casherName: req.body.casherName,
    });
@@ -196,7 +196,8 @@ exports.deleteAll = (req, res) => {
 
 // Find all published Purchases
 exports.findAllPublished = (req, res) => {
-   Expenses.find({ published: true })
+   var name = req.params.name;
+   Expenses.find({ published: true, casherName: name })
       .then((data) => {
          res.send(data);
       })

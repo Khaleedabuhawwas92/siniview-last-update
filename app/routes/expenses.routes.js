@@ -9,7 +9,7 @@ module.exports = (app) => {
     router.get('/', expenses.findAll);
  
     // Retrieve all published Item
-    router.get('/published', expenses.findAllPublished);
+    router.get('/published/:name', expenses.findAllPublished);
  
     // Retrieve a single Item with id
     router.get('/:id', expenses.findOne);

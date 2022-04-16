@@ -1,4 +1,5 @@
 const db = require('../models');
+var moment = require('moment');
 const genarat = require('../services/recipeNumber.js');
 const ReportSale = db.reportSale;
 
@@ -12,6 +13,7 @@ exports.create = (req, res) => {
       allIetms: req.body.allIetms,
       additions: req.body.additions,
       sumation: req.body.sumation,
+      time:moment(new Date()).format('hh:mm:ss a'),
       tax:req.body.tax,
       totalAccount:req.body.totalAccount,
       recpieNumber: req.body.recpieNumber,
@@ -211,7 +213,8 @@ exports.deleteAll = (req, res) => {
 
 // Find all published Tutorials
 exports.findAllPublished = (req, res) => {
-   ReportSale.find({ published: true })
+   var name = req.params.name;
+   ReportSale.find({ published: true ,casherName:name })
       .then((data) => {
          res.send(data);
       })
