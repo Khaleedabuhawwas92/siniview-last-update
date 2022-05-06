@@ -1,3 +1,4 @@
+const { Date } = require('mongoose');
 module.exports = (mongoose) => {
    var schema = mongoose.Schema(
       {
@@ -17,6 +18,7 @@ module.exports = (mongoose) => {
          casherName: { type: String, required: true, default: 'khaled' },
          published: Boolean,
       },
+
       { timestamps: true }
    );
 
