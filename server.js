@@ -38,6 +38,8 @@ require('./app/routes/calender.routes')(app);
 require('./app/routes/user.routes')(app);
 require('./app/routes/authorization.routes')(app);
 require('./app/routes/reportItems.routes')(app);
+require('./app/routes/expenses.routes')(app);
+require('./app/routes/purchase.routes')(app);
 app.use(function (req, res, next) {
    res.header('Access-Control-Allow-Origin', '*');
    res.header(

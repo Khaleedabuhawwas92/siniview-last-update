@@ -1,6 +1,6 @@
 const db = require('../models');
-var moment = require('moment');
-const ReportSale = db.reportSale;
+
+const Purchase = db.purchase;
 
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
@@ -8,76 +8,60 @@ exports.create = (req, res) => {
 
    // Create a Tutorial
 
-   const reportSale = new ReportSale({
-      allIetms: req.body.allIetms,
-      additions: req.body.additions,
-      sumation: req.body.sumation,
-      time: moment(new Date()).format('hh:mm:ss a'),
-      created_on: moment(new Date()).format('DD/MM/YYYY '),
-      tax: req.body.tax,
-      totalAccount: req.body.totalAccount,
-      recpieNumber: req.body.recpieNumber,
+   const purchase = new Purchase({
+      description: req.body.description,
       casherName: req.body.casherName,
-      discraption: req.body.discraption,
-      published: req.body.published ? req.body.published : true,
-      image: req.body.image
-         ? req.body.image
-         : 'https://picsum.photos/1920/1080?random',
-      additions: req.body.additions ? req.body.additions : ['null'],
-      sumation: req.body.sumation,
-      discraption: req.body.discraption ? req.body.discraption : 'true',
-  
-   
+      value: req.body.value,
+      wheigt: req.body.wheigt,
+      published: req.body.published,
    });
    // genarat();
 
    // Save Items in the database
-   reportSale
-      .save(reportSale)
+   purchase
+      .save(purchase)
       .then((data) => {
          res.send(data);
       })
       .catch((err) => {
          res.status(500).send({
             message:
-               err.message || 'Some error occurred while creating the Item.',
+               err.message ||
+               'Some error occurred while creating the Purchase.',
          });
       });
 };
-// exports.createNewProdect = (req, res) => {
-//    const id = req.params.id;
-//    let co = ['halooo', 'good job', 'am redy'];
-//    // Create a reportSale
-//    const product = new Object({
-//       allIetms: req.body.allIetms ? req.body.allIetms : co,
-//       additions: req.body.additions ? req.body.additions : [],
-//       sumation: req.body.sumation ? req.body.sumation : 27,
-//       casherName: req.body.casherName ? req.body.casherName : 'khaled',
-//       discraption: req.body.discraption ? req.body.discraption : 'true',
-//       price: req.body.price ? req.body.price : 22,
-//       created: new Date(),
-//    });
-//    // Save Item in the database
-//    ReportSale.findOneAndUpdate({ _id: id }, { $push: { product: product } })
-//       .then((data) => {
-//          res.send({ massege: 'prodect has been added successfully' }, product);
-//       })
-//       .catch((err) => {
-//          res.status(500).send({
-//             message:
-//                err.message || 'Some error occurred while creating the Item.',
-//          });
-//       });
-// };
+exports.createNewProdect = (req, res) => {
+   const id = req.params.id;
+   // Create a reportSale
+   const product = new Object({
+      title: req.body.title ? req.body.title : 'Boneless',
+      price: req.body.price ? req.body.price : '2.50',
+      image: req.body.image
+         ? req.body.image
+         : 'https://static.remove.bg/remove-bg-web/a6eefcd21dff1bbc2448264c32f7b48d7380cb17/assets/start_remove-c851bdf8d3127a24e2d137a55b1b427378cd17385b01aec6e59d5d4b5f39d2ec.png',
+      discraption: req.body.discraption ? req.body.discraption : 'true',
+      additions: req.body.additions ? req.body.additions : ['halooo'],
+   });
+   // Save Item in the database
+   Purchase.findOneAndUpdate({ _id: id }, { $push: { product: product } })
+      .then((data) => {
+         res.send({ massege: 'prodect has been added successfully' }, product);
+      })
+      .catch((err) => {
+         res.status(500).send({
+            message:
+               err.message ||
+               'Some error occurred while creating the Purchase.',
+         });
+      });
+};
 
 // Retrieve all Items from the database.
 exports.findAll = (req, res) => {
-   const tab = req.query.allIetms;
-   var condition = tab
-      ? { tab: { $regex: new RegExp(tab), $options: 'i' } }
-      : {};
 
-   ReportSale.find(condition)
+
+   Purchase.find()
       .then((data) => {
          res.send(data);
          console.log(data);
@@ -85,7 +69,7 @@ exports.findAll = (req, res) => {
       .catch((err) => {
          res.status(500).send({
             message:
-               err.message || 'Some error occurred while retrieving Items.',
+               err.message || 'Some error occurred while retrieving Purchase.',
          });
       });
 };
@@ -94,17 +78,17 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
    const id = req.params.id;
 
-   ReportSale.findById(id)
+   Purchase.findById(id)
       .then((data) => {
          if (!data)
             res.status(404).send({
-               message: 'Not found Item with id ' + id,
+               message: 'Not found Purchase with id ' + id,
             });
          else res.send(data);
       })
       .catch((err) => {
          res.status(500).send({
-            message: 'Error retrieving Item with id=' + id,
+            message: 'Error retrieving Purchase with id=' + id,
          });
       });
 };
@@ -119,11 +103,11 @@ exports.update = (req, res) => {
 
    const id = req.params.id;
 
-   ReportSale.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+   Purchase.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
       .then((data) => {
          if (!data) {
             res.status(404).send({
-               message: `Cannot update item with id=${id}. Maybe item was not found!`,
+               message: `Cannot update item with id=${id}. Maybe Purchase was not found!`,
             });
          } else res.send({ message: 'Item was updated successfully.' });
       })
@@ -138,7 +122,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
    const id = req.params.id;
 
-   ReportSale.findByIdAndRemove(id, { useFindAndModify: false })
+   Purchase.findByIdAndRemove(id, { useFindAndModify: false })
       .then((data) => {
          if (!data) {
             res.status(404).send({
@@ -162,17 +146,18 @@ exports.deleteProdectByName = (req, res) => {
    const tabName = req.body.tab;
 
    // update Item in the database
-   ReportSale.findOneAndUpdate(
+   Purchase.findOneAndUpdate(
       { tab: tabName },
       { $pull: { product: { _id: req.params.id } } }
    )
       .then((data) => {
-         res.send({ message: 'Item was Deleted prodect is successfully.' });
+         res.send({ message: 'Item was Deleted Purchase is successfully.' });
       })
       .catch((err) => {
          res.status(500).send({
             message:
-               err.message || 'Some error occurred while creating the Item.',
+               err.message ||
+               'Some error occurred while creating the Purchase.',
          });
       });
 };
@@ -181,7 +166,7 @@ exports.deleteProdectByName = (req, res) => {
 exports.published = (req, res) => {
    const id = req.params.id;
 
-   ReportSale.findByIdAndUpdate(
+   Purchase.findByIdAndUpdate(
       id,
       {
          $set: {
@@ -193,29 +178,30 @@ exports.published = (req, res) => {
       .then((data) => {
          if (!data) {
             res.status(404).send({
-               message: `Cannot update Item with id=${id}. Maybe Tutorial was not found!`,
+               message: `Cannot update Item with id=${id}. Maybe Purchase was not found!`,
             });
-         } else res.send({ message: 'Item was updated successfully.' });
+         } else res.send({ message: 'Purchase was updated successfully.' });
       })
       .catch((err) => {
          res.status(500).send({
-            message: 'Error updating Item with id=' + id,
+            message: 'Error updating Purchase with id=' + id,
          });
       });
 };
 
 // Delete all Tutorials from the database.
 exports.deleteAll = (req, res) => {
-   ReportSale.deleteMany({})
+   Purchase.deleteMany({})
       .then((data) => {
          res.send({
-            message: `${data.deletedCount} Item were deleted successfully!`,
+            message: `${data.deletedCount} Purchase were deleted successfully!`,
          });
       })
       .catch((err) => {
          res.status(500).send({
             message:
-               err.message || 'Some error occurred while removing all Item.',
+               err.message ||
+               'Some error occurred while removing all Purchase.',
          });
       });
 };
@@ -223,14 +209,14 @@ exports.deleteAll = (req, res) => {
 // Find all published Tutorials
 exports.findAllPublished = (req, res) => {
    var name = req.params.name;
-   ReportSale.find({ published: true, casherName: name })
+   Purchase.find({ published: true,casherName:name })
       .then((data) => {
          res.send(data);
       })
       .catch((err) => {
          res.status(500).send({
             message:
-               err.message || 'Some error occurred while retrieving items.',
+               err.message || 'Some error occurred while retrieving Purchase.',
          });
       });
 };

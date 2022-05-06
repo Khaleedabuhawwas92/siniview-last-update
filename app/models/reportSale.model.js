@@ -2,13 +2,20 @@ const { Date } = require('mongoose');
 module.exports = (mongoose) => {
    var schema = mongoose.Schema(
       {
-         allIetms: { type: Array, required: true, timestamps: true,default:["khaled","ahmad","abdallah"] },
-         
-         discraption: String,
-         additions: Array,
+         allIetms: {
+            type: Array,
+            required: true,
+            default: ['khaleed', 'ahmad', 'abuhawwas'],
+         },
+         discraption: { type: Number, required: true, default: 25 },
+         time: { type: String, required: true },
+         created_on: {type: String, required: true},
+         additions: { type: Array, required: true, default: 'null' },
          sumation: { type: Number, required: true, default: 25 },
+         recpieNumber: { type: Number, required: true, default: 0 },
+         tax: { type: Number, required: true, default: 1 },
+         totalAccount: { type: Number, required: true, default: 1 },
          casherName: { type: String, required: true, default: 'khaled' },
-         price: { type: Number, required: true, default: 22 },
          published: Boolean,
       },
 

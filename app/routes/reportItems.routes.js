@@ -5,21 +5,16 @@ module.exports = (app) => {
    // Create a new reportItems
    router.post('/', reportItems.create);
 
- 
-
-   // find all  reportItems
+   // faind all  reportItems
    router.get('/', reportItems.findAll);
 
-   // find all  reportItems published
-   router.get('/unDisplayPublished/:id', reportItems.published);
-   // find all  reportItems published
-   router.get('/findPublished', reportItems.findAllPublished);
+   // faind all  reportItems
+   router.get('/undisplaypublished/:id', reportItems.published);
+   // faind all  reportItems
+   router.get('/displaypublished/:name', reportItems.findAllPublished);
 
    // Retrieve a single reportItems with id
    router.get('/:id', reportItems.findOne);
-
-
-   
 
    app.use('/api/reportItems', router);
 };

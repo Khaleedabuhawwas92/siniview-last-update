@@ -1,6 +1,6 @@
 
 module.exports = (mongoose) => {
-   var Float = require('mongoose-float').loadType(mongoose);
+
    var schema = mongoose.Schema({
       tab: String,
       description: String,
