@@ -9,12 +9,11 @@ module.exports = (app) => {
    router.get('/', purchase.findAll);
 
    // faind all  purchase published
-   router.get('/published', purchase.findAllPublished);
+   router.get('/published/:name', purchase.findAllPublished);
 
    // faind all  purchase
    router.get('/undisplaypublished/:id', purchase.published);
-   // faind all  purchase
-   router.get('/displaypublished', purchase.findAllPublished);
+
 
    // Retrieve a single purchase with id
    router.get('/:id', purchase.findOne);

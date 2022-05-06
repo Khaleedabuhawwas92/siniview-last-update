@@ -1,4 +1,5 @@
 const db = require('../models');
+var moment = require('moment');
 const Expenses = db.expenses;
 
 // Create and Save a new daet
@@ -12,8 +13,9 @@ exports.create = (req, res) => {
    // Create a daet
    const expenses = new Expenses({
       description: req.body.description,
+      time: moment(new Date()).format('hh:mm:ss a'),
+      created_on: moment(new Date()).format('DD/MM/YYYY '),
       value: req.body.value,
-
       published: req.body.published,
       casherName: req.body.casherName,
    });

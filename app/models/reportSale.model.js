@@ -1,4 +1,3 @@
-
 module.exports = (mongoose) => {
    var schema = mongoose.Schema(
       {
@@ -8,7 +7,8 @@ module.exports = (mongoose) => {
             default: ['khaleed', 'ahmad', 'abuhawwas'],
          },
          discraption: { type: Number, required: true, default: 25 },
-         time: { type: String , required: true},
+         time: { type: String, required: true },
+         created_on: {type: String, required: true},
          additions: { type: Array, required: true, default: 'null' },
          sumation: { type: Number, required: true, default: 25 },
          recpieNumber: { type: Number, required: true, default: 0 },

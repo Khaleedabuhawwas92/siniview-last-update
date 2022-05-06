@@ -208,7 +208,8 @@ exports.deleteAll = (req, res) => {
 
 // Find all published Tutorials
 exports.findAllPublished = (req, res) => {
-   Purchase.find({ published: true })
+   var name = req.params.name;
+   Purchase.find({ published: true,casherName:name })
       .then((data) => {
          res.send(data);
       })
